@@ -230,67 +230,12 @@ function New-Project {
       }
 
       do {
-        $Status = Get-AzDevOpsOperations -OperationId $Result.id
+        $Status = Get-AzDevOpsOperation -OperationId $Result.id
         Write-Verbose $Status.status
       } until ($Status.status -eq 'succeeded')
 
       Start-Sleep -Seconds 1
       Get-AzDevOpsProject | Where-Object -Property name -eq $Name
-    }
-    else {
-      $PSCmdlet.ThrowTerminatingError(
-        [System.Management.Automation.ErrorRecord]::new(
-          ([System.Management.Automation.ItemNotFoundException]"Not connected to Azure DevOps, please run Connect-AzDevOpsOrganization"),
-          'Projects.Functions',
-          [System.Management.Automation.ErrorCategory]::OpenError,
-          $MyObject
-        )
-      )
-    }
-  }
-  catch {
-    throw $_
-  }
-}
-function Update-Project {
-  [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium',
-    HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/core/blob/master/docs/Update-AzDevOpsProject.md#update-azdevopsproject',
-    PositionalBinding = $true)]
-  [OutputType([Object])]
-  param (
-    [Parameter(Mandatory = $false)]
-    [string]$Name,
-    [Parameter(Mandatory = $false)]
-    [string]$Description,
-    [Parameter(Mandatory = $true)]
-    [object]$Project
-  )
-
-  $ErrorActionPreference = 'Stop'
-  $Error.Clear()
-
-  try {
-    #
-    # Are we connected
-    #
-    if ($Global:azDevOpsConnected) {
-      $Body = @{
-        "name"         = $Name
-        "description"  = $Description
-        "capabilities" = @{
-          "versioncontrol"  = @{
-            "sourceControlType" = "Git"
-          }
-          "processTemplate" = @{
-            "templateTypeId" = "b8a3a935-7e91-48b8-a94c-606d37c3e9f2"
-          }
-        }
-      } | ConvertTo-Json -Depth 5
-
-      $uriProjects = $Global:azDevOpsOrg + "_apis/projects/$($Project.id)?api-version=5.1"
-      if ($PSCmdlet.ShouldProcess("Modify", "Update $($Project.Name) values")) {
-        Invoke-RestMethod -Uri $uriProjects -Method Patch -Headers $Global:azDevOpsHeader -Body $Body -ContentType "application/json"
-      }
     }
     else {
       $PSCmdlet.ThrowTerminatingError(
@@ -331,7 +276,7 @@ function Remove-Project {
       }
 
       do {
-        $Status = Get-AzDevOpsOperations -OperationId $Result.id
+        $Status = Get-AzDevOpsOperation -OperationId $Result.id
         Write-Verbose $Status.status
       } until ($Status.status -eq 'succeeded')
 
@@ -362,9 +307,8 @@ function Update-Project {
     [Parameter(Mandatory = $false)]
     [string]$Description,
     [Parameter(Mandatory = $false)]
-    [ValidateLength(3)]
     [string]$Abbreviation,
-    [Parameter(Mandatory = $true)]
+    [Parameter(ValueFromPipeline)]
     [object]$Project
   )
 
@@ -383,8 +327,16 @@ function Update-Project {
     
       $uriProjects = $Global:azDevOpsOrg + "_apis/projects/$($Project.id)?api-version=5.1"
       if ($PSCmdlet.ShouldProcess("Remove", "Delete $($Project.Name) from $($Global:azDevOpsOrg) Azure Devops")) {
-        Invoke-RestMethod -Uri $uriProjects -Method Patch -Headers $Global:azDevOpsHeader -Body ($Body |ConvertTo-Json) -ContentType "application/json"
+        $Result = Invoke-RestMethod -Uri $uriProjects -Method Patch -Headers $Global:azDevOpsHeader -Body ($Body |ConvertTo-Json) -ContentType "application/json"
       }
+
+      do {
+        $Status = Get-AzDevOpsOperation -OperationId $Result.id
+        Write-Verbose $Status.status
+      } until ($Status.status -eq 'succeeded')
+
+      Start-Sleep -Seconds 1
+      Get-AzDevOpsProject -ProjectId $Project.id
     }
     else {
       $PSCmdlet.ThrowTerminatingError(
