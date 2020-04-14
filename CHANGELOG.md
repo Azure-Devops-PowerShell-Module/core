@@ -13,3 +13,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Module manifest created
 - Module file created
 - psake added
+- Added connect-organizatoin
+- Updated psd with defaultprefix and privatedata
