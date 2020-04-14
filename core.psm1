@@ -325,7 +325,7 @@ function Update-Project {
       if ($Name) {Add-Member -InputObject $Body -MemberType NoteProperty -Name Name -Value $Name}
       if ($Description) {Add-Member -InputObject $Body -MemberType NoteProperty -Name Description -Value $Description}
       if ($Abbreviation) {Add-Member -InputObject $Body -MemberType NoteProperty -Name Abbreviation -Value $Abbreviation}
-    
+
       $uriProjects = $Global:azDevOpsOrg + "_apis/projects/$($Project.id)?api-version=5.1"
       if ($PSCmdlet.ShouldProcess("Update", "Change $($Project.Name) from $($Global:azDevOpsOrg) Azure Devops")) {
         $Result = Invoke-RestMethod -Uri $uriProjects -Method Patch -Headers $Global:azDevOpsHeader -Body ($Body |ConvertTo-Json) -ContentType "application/json"
@@ -347,7 +347,7 @@ function Update-Project {
           [System.Management.Automation.ErrorCategory]::OpenError,
           $MyObject
         )
-      )  
+      )
     }
   }
   catch {
