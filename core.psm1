@@ -1,0 +1,1 @@
+# .ExternalHelp authentication-help.xml
