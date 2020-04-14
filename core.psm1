@@ -307,6 +307,7 @@ function Update-Project {
     [Parameter(Mandatory = $false)]
     [string]$Description,
     [Parameter(Mandatory = $false)]
+    [ValidateLength(1,3)]
     [string]$Abbreviation,
     [Parameter(ValueFromPipeline)]
     [object]$Project
@@ -326,7 +327,7 @@ function Update-Project {
       if ($Abbreviation) {Add-Member -InputObject $Body -MemberType NoteProperty -Name Abbreviation -Value $Abbreviation}
     
       $uriProjects = $Global:azDevOpsOrg + "_apis/projects/$($Project.id)?api-version=5.1"
-      if ($PSCmdlet.ShouldProcess("Remove", "Delete $($Project.Name) from $($Global:azDevOpsOrg) Azure Devops")) {
+      if ($PSCmdlet.ShouldProcess("Update", "Change $($Project.Name) from $($Global:azDevOpsOrg) Azure Devops")) {
         $Result = Invoke-RestMethod -Uri $uriProjects -Method Patch -Headers $Global:azDevOpsHeader -Body ($Body |ConvertTo-Json) -ContentType "application/json"
       }
 

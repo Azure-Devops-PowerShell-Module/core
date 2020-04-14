@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Module Migration
 
-## [1.0.1] - 2020-04-14
+## [1.0.2] - 2020-04-14
 ### Added
 - Repository Created
 - Module manifest created
@@ -15,3 +15,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - psake added
 - Added connect-organizatoin
 - Updated psd with defaultprefix and privatedata
+- Added functions from authentication, operations, proceses, projects and teams
