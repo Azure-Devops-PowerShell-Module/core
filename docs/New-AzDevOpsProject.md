@@ -109,6 +109,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
-[Connect-AzDevOpsOrganization](https://github.com/Azure-Devops-PowerShell-Module/authentication/blob/master/docs/Connect-AzDevOpsOrganization.md#connect-azdevopsorganization)
+[Connect-AzDevOpsOrganization](https://github.com/Azure-Devops-PowerShell-Module/core/blob/master/docs/Connect-AzDevOpsOrganization.md#connect-azdevopsorganization)
 
-[Get-AzDevOpsOperation](https://github.com/Azure-Devops-PowerShell-Module/operations/blob/master/docs/Connect-AzDevOpsOrganization.md#get-azdevopsoperation)
+[Get-AzDevOpsOperation](https://github.com/Azure-Devops-PowerShell-Module/core/blob/master/docs/Connect-AzDevOpsOrganization.md#get-azdevopsoperation)
