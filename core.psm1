@@ -1,4 +1,4 @@
-# .ExternalHelp authentication-help.xml
+# .ExternalHelp core-help.xml
 function Connect-Organization {
   [CmdletBinding(
     HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/core/blob/master/docs/Connect-AzDevOpsOrganization.md#connect-azdevopsOrganization',
@@ -113,7 +113,7 @@ function Get-Process {
 }
 function Get-Project {
   [CmdletBinding(
-    HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/projects/blob/master/docs/Get-AzDevOpsProject.md#get-azdevopsproject',
+    HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/core/blob/master/docs/Get-AzDevOpsProject.md#get-azdevopsproject',
     PositionalBinding = $true)]
     [OutputType([Object])]
   param (
@@ -155,7 +155,7 @@ function Get-Project {
 }
 function Get-ProjectProperty {
   [CmdletBinding(
-    HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/projects/blob/master/docs/Get-AzDevOpsProjectProperty.md#get-azdevopsprojectproperty',
+    HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/core/blob/master/docs/Get-AzDevOpsProjectProperty.md#get-azdevopsprojectproperty',
     PositionalBinding = $true)]
     [OutputType([Object])]
   param (
@@ -568,7 +568,7 @@ function Update-Team {
 }
 function Get-TeamMember {
   [CmdletBinding(
-    HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/teams/blob/master/docs/Get-AzDevOpsTeamMember.md#get-azdevopsteammember',
+    HelpURI = 'https://github.com/Azure-Devops-PowerShell-Module/core/blob/master/docs/Get-AzDevOpsTeamMember.md#get-azdevopsteammember',
     PositionalBinding = $true)]
   [OutputType([Object])]
   param (

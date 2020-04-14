@@ -16,3 +16,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added connect-organizatoin
 - Updated psd with defaultprefix and privatedata
 - Added functions from authentication, operations, proceses, projects and teams
+- Added help and about help
